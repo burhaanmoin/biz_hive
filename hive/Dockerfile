@@ -15,5 +15,8 @@ COPY src src
 RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
-# Run the Spring Boot app
-CMD ["java", "-jar", "target/*.jar"] 
+# Debug: list files in the target directory
+RUN ls -l target
+
+# Run the Spring Boot app (update the JAR name if needed)
+CMD ["java", "-jar", "target/hive-0.0.1-SNAPSHOT.jar"] 
