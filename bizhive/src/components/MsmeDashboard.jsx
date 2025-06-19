@@ -543,6 +543,49 @@ const MsmeDashboard = () => {
                     </Grid>
                   </Grid>
                 </Paper>
+
+                {/* --- BEGIN: Missing Data Prompts --- */}
+                {(!enterprise || !enterprise.enterpriseName || !enterprise.msmeRegNo || !enterprise.typeOfBusiness || !enterprise.employeeCount || !enterprise.annualTurnover) && (
+                  <Paper className="missing-data-prompt" sx={{ my: 3, p: 3, background: '#fffbe6', border: '1px solid #ffe082' }}>
+                    <Typography variant="h6" color="warning.main" sx={{ mb: 1 }}>
+                      Complete your business profile for a better experience
+                    </Typography>
+                    <Typography variant="body2" sx={{ mb: 2 }}>
+                      Some important business details are missing. Please fill in your profile to unlock all dashboard features.
+                    </Typography>
+                    <Button variant="contained" color="warning" onClick={() => navigate('/msme-dashboard/profile')}>
+                      Fill Profile
+                    </Button>
+                  </Paper>
+                )}
+                {documents && documents.length === 0 && (
+                  <Paper className="missing-data-prompt" sx={{ my: 3, p: 3, background: '#e3f2fd', border: '1px solid #90caf9' }}>
+                    <Typography variant="h6" color="primary.main" sx={{ mb: 1 }}>
+                      No documents uploaded
+                    </Typography>
+                    <Typography variant="body2" sx={{ mb: 2 }}>
+                      Upload your business documents to stay compliant and access more features.
+                    </Typography>
+                    <Button variant="contained" color="primary" onClick={handleDocDialogOpen}>
+                      Upload Document
+                    </Button>
+                  </Paper>
+                )}
+                {reports && reports.length === 0 && (
+                  <Paper className="missing-data-prompt" sx={{ my: 3, p: 3, background: '#f3e5f5', border: '1px solid #ce93d8' }}>
+                    <Typography variant="h6" color="secondary.main" sx={{ mb: 1 }}>
+                      No reports generated
+                    </Typography>
+                    <Typography variant="body2" sx={{ mb: 2 }}>
+                      Generate your first business report to track growth and performance.
+                    </Typography>
+                    <Button variant="contained" color="secondary" onClick={handleReportDialogOpen}>
+                      Generate Report
+                    </Button>
+                  </Paper>
+                )}
+                {/* --- END: Missing Data Prompts --- */}
+
                 {/* Scheme Matchmaker Section */}
                 <Grid container spacing={3} className="section-grid">
                   <Grid item xs={12} md={6}>
@@ -962,9 +1005,11 @@ const EnterpriseProfile = ({ enterprise, setEnterprise, loading, error }) => {
                 size="small"
                 fullWidth
                 sx={{ mb: 1 }}
+                error={!data.enterpriseName}
+                helperText={!data.enterpriseName ? 'Required' : ''}
               />
             ) : (
-              <Typography variant="h5" className="company-name">
+              <Typography variant="h5" className="company-name" style={{ color: !data.enterpriseName ? '#ff9800' : undefined }}>
                 {data.enterpriseName || 'N/A'}
                         </Typography>
             )}

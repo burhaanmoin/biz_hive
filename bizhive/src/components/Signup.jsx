@@ -20,6 +20,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Signup.scss';
+import { API_BASE_URL } from '../services/api';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -85,7 +86,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8080/auth/signup', formData, {
+      const response = await axios.post(`${API_BASE_URL}/auth/signup`, formData, {
         headers: {
           'Content-Type': 'application/json'
         },

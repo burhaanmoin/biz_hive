@@ -20,7 +20,8 @@ import {
 } from '@mui/icons-material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css';
+import '../styles/Login.css';
+import { API_BASE_URL } from '../services/api';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8080/auth/login', formData, {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, formData, {
         headers: {
           'Content-Type': 'application/json'
         }

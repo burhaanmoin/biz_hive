@@ -100,4 +100,9 @@ public class Enterprise {
 
     @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL, orphanRemoval = true)
     private java.util.List<EnterpriseReport> reports = new java.util.ArrayList<>();
+
+    public Long getId() { return id; }
+    public String getEmail() { return email; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public String getLoginId() { return loginId; }
 }
