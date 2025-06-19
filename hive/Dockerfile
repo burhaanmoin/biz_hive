@@ -12,6 +12,7 @@ COPY mvnw pom.xml ./
 COPY src src
 
 # Build the application
+RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
 # Run the Spring Boot app
