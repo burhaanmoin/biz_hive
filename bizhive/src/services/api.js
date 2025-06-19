@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080'; // <-- match your backend port // Adjust this to match your backend URL
+const API_BASE_URL = 'https://biz-hive.onrender.com'; // Updated to deployed backend URL
 
 export const loginUser = async (credentials) => {
   try {
