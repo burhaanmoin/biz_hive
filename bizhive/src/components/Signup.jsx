@@ -144,6 +144,11 @@ const Signup = () => {
                 value={formData.fullName}
                 onChange={handleChange}
                 className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -156,6 +161,11 @@ const Signup = () => {
                 value={formData.aadhaarNumber}
                 onChange={handleChange}
                 className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -168,6 +178,11 @@ const Signup = () => {
                 value={formData.panNumber}
                 onChange={handleChange}
                 className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -188,6 +203,11 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -200,6 +220,11 @@ const Signup = () => {
                 value={formData.phoneNumber}
                 onChange={handleChange}
                 className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -219,6 +244,11 @@ const Signup = () => {
                 value={formData.enterpriseName}
                 onChange={handleChange}
                 className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -232,6 +262,11 @@ const Signup = () => {
                 value={formData.enterpriseType}
                 onChange={handleChange}
                 className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               >
                 {enterpriseTypes.map((type) => (
                   <MenuItem key={type} value={type}>
@@ -252,6 +287,11 @@ const Signup = () => {
                 value={formData.businessActivity}
                 onChange={handleChange}
                 className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -273,6 +313,11 @@ const Signup = () => {
                 className="signup-input"
                 InputLabelProps={{ shrink: true }}
                 helperText="Bank statement/Property tax receipt"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -287,6 +332,11 @@ const Signup = () => {
                 className="signup-input"
                 InputLabelProps={{ shrink: true }}
                 helperText="PAN Card"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -301,6 +351,11 @@ const Signup = () => {
                 className="signup-input"
                 InputLabelProps={{ shrink: true }}
                 helperText="Sale bills/Purchase bills"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -315,6 +370,11 @@ const Signup = () => {
                 className="signup-input"
                 InputLabelProps={{ shrink: true }}
                 helperText="Industrial license/Machinery bills"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
 
@@ -328,6 +388,11 @@ const Signup = () => {
                 className="signup-input"
                 InputLabelProps={{ shrink: true }}
                 helperText="MOA/AOA (if applicable)"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
               />
             </Grid>
           </Grid>

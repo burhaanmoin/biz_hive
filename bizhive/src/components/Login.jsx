@@ -158,6 +158,11 @@ const Login = () => {
                   helperText={error}
                   disabled={loading}
                   className={`login-input ${loading ? 'loading' : ''}`}
+                  sx={{
+                    '& .MuiInputBase-input': {
+                      color: '#1976d2',
+                    },
+                  }}
                 />
                 <TextField
                   margin="normal"
@@ -174,6 +179,11 @@ const Login = () => {
                   helperText={error}
                   disabled={loading}
                   className={`login-input ${loading ? 'loading' : ''}`}
+                  sx={{
+                    '& .MuiInputBase-input': {
+                      color: '#1976d2',
+                    },
+                  }}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
