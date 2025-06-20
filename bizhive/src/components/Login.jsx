@@ -136,6 +136,12 @@ const Login = () => {
                 Welcome Back!
               </Typography>
 
+              {/* Demo credentials info */}
+              <Alert severity="info" sx={{ width: '100%', mb: 2 }}>
+                <strong>Demo Credentials:</strong><br />
+                <span>MSME: <b>enterprise@gmail.com</b> / <b>1234</b></span>
+              </Alert>
+
               {error && (
                 <Alert severity="error" className="error-alert">
                   {error}
