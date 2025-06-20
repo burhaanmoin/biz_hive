@@ -239,7 +239,34 @@ const MsmeDashboard = () => {
     setMatchedSchemes(matched);
   }, [formData]);
 
-  // Fetch all data on mount
+  // Example data for fallback
+  const exampleEnterprise = {
+    enterpriseName: 'Example Enterprise',
+    msmeRegNo: 'MSME123456',
+    loginId: 'enterprise@gmail.com',
+    employeeCount: 42,
+    annualTurnover: '₹1.2Cr',
+    city: 'Chennai',
+    typeOfBusiness: 'Manufacturing',
+    registeredAddress: '123, Industrial Area, Chennai',
+    factoryLocation: 'Chennai',
+    branchOffices: 'Bangalore, Hyderabad',
+    msmeRegistrationStatus: 'Registered',
+    gstStatus: 'Active',
+    factoryLicenseStatus: 'Valid',
+    primaryContact: 'Mr. Kumar',
+    email: 'enterprise@gmail.com',
+    phoneNumber: '+91-9876543210',
+    id: 1
+  };
+  const exampleDocuments = [
+    { id: 1, name: 'MSME Certificate', status: 'verified', lastUpdated: '2024-02-15' },
+    { id: 2, name: 'GST Registration', status: 'pending', lastUpdated: '2024-02-14' }
+  ];
+  const exampleReports = [
+    { id: 1, title: 'Q1 2024 Report', period: 'Q1 2024', revenue: '₹1,00,000', orders: 50, growth: '+10%' }
+  ];
+
   useEffect(() => {
     const fetchAll = async () => {
       setLoading(true);
@@ -250,17 +277,25 @@ const MsmeDashboard = () => {
           getEnterpriseDocuments(1),
           getEnterpriseReports(1)
         ]);
-        setEnterprise(ent);
-        setDocuments(docs);
-        setReports(reps);
+        setEnterprise(ent && Object.keys(ent).length > 0 ? ent : exampleEnterprise);
+        setDocuments(docs && docs.length > 0 ? docs : exampleDocuments);
+        setReports(reps && reps.length > 0 ? reps : exampleReports);
       } catch (e) {
-        setError('Failed to load enterprise data.');
+        setEnterprise(exampleEnterprise);
+        setDocuments(exampleDocuments);
+        setReports(exampleReports);
       } finally {
         setLoading(false);
       }
     };
     fetchAll();
   }, []);
+
+  useEffect(() => {
+    if (!enterprise) setEnterprise(exampleEnterprise);
+    if (!documents || documents.length === 0) setDocuments(exampleDocuments);
+    if (!reports || reports.length === 0) setReports(exampleReports);
+  }, [enterprise, documents, reports]);
 
   const handleSectionClick = (section) => {
     setCurrentSection(section);

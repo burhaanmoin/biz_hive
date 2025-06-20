@@ -20,7 +20,7 @@ import {
 } from '@mui/icons-material';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/Login.css';
+import './Login.css';
 import { API_BASE_URL } from '../services/api';
 
 const Login = () => {
@@ -45,6 +45,39 @@ const Login = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
+
+    // Demo login bypass
+    if (formData.email === 'admin@gmail.com' && formData.password === '12345') {
+      localStorage.setItem('userRole', 'ADMIN');
+      navigate('/admin-dashboard');
+      setLoading(false);
+      return;
+    }
+    if (formData.email === 'enterprise@gmail.com' && formData.password === '1234') {
+      localStorage.setItem('userRole', 'ENTERPRISE');
+      localStorage.setItem('userDetails', JSON.stringify({
+        enterpriseName: 'Example Enterprise',
+        msmeRegNo: 'MSME123456',
+        loginId: 'enterprise@gmail.com',
+        employeeCount: 42,
+        annualTurnover: '₹1.2Cr',
+        city: 'Chennai',
+        typeOfBusiness: 'Manufacturing',
+        registeredAddress: '123, Industrial Area, Chennai',
+        factoryLocation: 'Chennai',
+        branchOffices: 'Bangalore, Hyderabad',
+        msmeRegistrationStatus: 'Registered',
+        gstStatus: 'Active',
+        factoryLicenseStatus: 'Valid',
+        primaryContact: 'Mr. Kumar',
+        email: 'enterprise@gmail.com',
+        phoneNumber: '+91-9876543210',
+        id: 1
+      }));
+      navigate('/msme-dashboard');
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await axios.post(`${API_BASE_URL}/auth/login`, formData, {

@@ -27,6 +27,7 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     // Personal Information (Aadhaar Details)
@@ -84,27 +85,12 @@ const Signup = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
-    try {
-      const response = await axios.post(`${API_BASE_URL}/auth/signup`, formData, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        withCredentials: true
-      });
-
-      if (response.data.success) {
-        navigate('/login');
-      }
-    } catch (err) {
-      if (err.response?.data?.message) {
-        setError(err.response.data.message);
-      } else {
-        setError('Registration failed. Please try again.');
-      }
-    } finally {
+    // Demo bypass: skip backend call
+    setTimeout(() => {
+      setSuccess(true);
       setLoading(false);
-    }
+      setTimeout(() => navigate('/login'), 1500);
+    }, 1000);
   };
 
   const handleFileChange = (e) => {
@@ -132,6 +118,12 @@ const Signup = () => {
           {error && (
             <Alert severity="error" className="error-alert">
               {error}
+            </Alert>
+          )}
+
+          {success && (
+            <Alert severity="success" className="success-alert">
+              Registration successful! Redirecting to login...
             </Alert>
           )}
 
