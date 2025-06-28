@@ -20,7 +20,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Signup.scss';
-import { API_BASE_URL } from '../services/api';
+import { API_BASE_URL, signupEnterprise } from '../services/api';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -85,12 +85,43 @@ const Signup = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
-    // Demo bypass: skip backend call
-    setTimeout(() => {
-      setSuccess(true);
+    setSuccess(false);
+
+    // Prepare data for backend (map frontend fields to backend fields)
+    const payload = {
+      fullName: formData.fullName,
+      loginId: formData.loginId,
+      email: formData.email,
+      password: formData.password,
+      phoneNumber: formData.phoneNumber,
+      aadhaarNumber: formData.aadhaarNumber, // Not in backend, will be ignored
+      panNumber: formData.panNumber,         // Not in backend, will be ignored
+      enterpriseName: formData.enterpriseName,
+      enterpriseType: formData.enterpriseType,
+      businessActivity: formData.businessActivity, // Not in backend, will be ignored
+      gstin: formData.gstin,
+      establishmentYear: formData.establishmentYear,
+      streetAddress: formData.streetAddress,
+      city: formData.city,
+      state: formData.state,
+      pincode: formData.pincode,
+      // The rest are not required by backend for signup
+    };
+
+    try {
+      const res = await signupEnterprise(payload);
+      if (res.success) {
+        setSuccess(true);
+        setLoading(false);
+        setTimeout(() => navigate('/login'), 1500);
+      } else {
+        setError(res.message || 'Registration failed');
+        setLoading(false);
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration failed');
       setLoading(false);
-      setTimeout(() => navigate('/login'), 1500);
-    }, 1000);
+    }
   };
 
   const handleFileChange = (e) => {
@@ -215,6 +246,37 @@ const Signup = () => {
               <TextField
                 required
                 fullWidth
+                label="Password"
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                value={formData.password}
+                onChange={handleChange}
+                className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPassword((show) => !show)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                fullWidth
                 label="Phone Number"
                 name="phoneNumber"
                 value={formData.phoneNumber}
@@ -304,7 +366,6 @@ const Signup = () => {
 
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 fullWidth
                 type="file"
                 label="Address Proof"
@@ -323,7 +384,6 @@ const Signup = () => {
 
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 fullWidth
                 type="file"
                 label="Identity Proof"
@@ -342,7 +402,6 @@ const Signup = () => {
 
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 fullWidth
                 type="file"
                 label="Business Transaction Proof"
@@ -361,7 +420,6 @@ const Signup = () => {
 
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 fullWidth
                 type="file"
                 label="Machinery & Licenses"
@@ -394,6 +452,30 @@ const Signup = () => {
                   },
                 }}
               />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                fullWidth
+                select
+                label="Establishment Year"
+                name="establishmentYear"
+                value={formData.establishmentYear}
+                onChange={handleChange}
+                className="signup-input"
+                sx={{
+                  '& .MuiInputBase-input': {
+                    color: '#1976d2',
+                  },
+                }}
+              >
+                {yearRange.map((year) => (
+                  <MenuItem key={year} value={year}>
+                    {year}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
           </Grid>
 

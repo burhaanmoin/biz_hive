@@ -57,6 +57,11 @@ export const updateEnterprise = async (id, data) => {
   return response.data;
 };
 
+export const signupEnterprise = async (enterpriseData) => {
+  const response = await axios.post(`${API_BASE_URL}/api/enterprise/signup`, enterpriseData);
+  return response.data;
+};
+
 // You can keep the default export if needed
 const api = {
   login: loginUser,
@@ -68,6 +73,7 @@ const api = {
   deleteEnterpriseDocument: deleteEnterpriseDocument,
   deleteEnterpriseReport: deleteEnterpriseReport,
   updateEnterprise: updateEnterprise,
+  signupEnterprise: signupEnterprise,
   // Add other API methods as needed
 };
 
