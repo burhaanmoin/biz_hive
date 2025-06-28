@@ -58,7 +58,7 @@ export const updateEnterprise = async (id, data) => {
 };
 
 export const signupEnterprise = async (enterpriseData) => {
-  const response = await axios.post(`${API_BASE_URL}/api/enterprise/signup`, enterpriseData);
+  const response = await axios.post(`${API_BASE_URL}/auth/signup`, enterpriseData);
   return response.data;
 };
 
